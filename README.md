@@ -6,6 +6,13 @@
 Here is the example of usage:
 
 ```python
+
+import os
+# set the path to the vcvars64.bat file via environment variable
+os.environ['C2DLL_VCVARSPATH'] = 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat'
+# set the working directory for the library
+os.environ['C2DLL_WORKDIR'] = './__dll__'
+
 from c2dll import dllfunc, as_ptr
 import numpy as np
 
@@ -33,6 +40,10 @@ def fwd(eps, n, x=[0.1711, 0.1117]):
     points = np.zeros(shape=(2*n))
     d.fwd(as_ptr([eps,]), as_ptr(x), n, as_ptr(points))
     return points.reshape((n, 2))
+
+res = fwd(0.1, 1000)
+print(res)
+
 ```
 
 
